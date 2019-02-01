@@ -1,0 +1,36 @@
+/*
+ * SPI_Driver_Cfg.c
+ *
+ *  Created on: Sep 18, 2018
+ *      Author: zsolt.balo
+ */
+
+#include "SPI_Driver_Cfg.h"
+
+SPI_Driver_Setup_Type SPI_CONF_SETUP[SPI_DRIVER_INSTANCE_NUM];
+
+SPI_Driver_Setup_Type* SPI_SETUP = SPI_CONF_SETUP;
+
+void SPI_Driver_Init_Cfg()
+{
+	/*SPI_CONF_SETUP[SPI_DRIVER_0].SPI_Instance = SPI1;
+	SPI_CONF_SETUP[SPI_DRIVER_0].SPI_Driver_communication_port = GPIO_DRIVER_PORTA;
+	SPI_CONF_SETUP[SPI_DRIVER_0].SPI_Driver_slave_select_port = GPIO_DRIVER_PORTB;
+	SPI_CONF_SETUP[SPI_DRIVER_0].SPI_Driver_slave_select_pin = GPIO_SETUP[GPIO_DRIVER_PORTB].GPIO_Pins[GPIO_DRIVER_PORTB_PIN1];
+	SPI_CONF_SETUP[SPI_DRIVER_0].SPI_Driver_miso_pin = GPIO_SETUP[GPIO_DRIVER_PORTA].GPIO_Pins[GPIO_DRIVER_PORTA_PIN6];
+	SPI_CONF_SETUP[SPI_DRIVER_0].SPI_Driver_mosi_pin = GPIO_SETUP[GPIO_DRIVER_PORTA].GPIO_Pins[GPIO_DRIVER_PORTA_PIN7];
+	SPI_CONF_SETUP[SPI_DRIVER_0].SPI_Driver_sck_pin = GPIO_SETUP[GPIO_DRIVER_PORTA].GPIO_Pins[GPIO_DRIVER_PORTA_PIN5];
+	SPI_CONF_SETUP[SPI_DRIVER_0].SPI_Driver_baud_rate_control = SPI_DRIVER_BAUD_RATE_DIV32;
+	SPI_CONF_SETUP[SPI_DRIVER_0].SPI_Driver_clock_polarity = SPI_DRIVER_CPOL_IDLE_0;
+	SPI_CONF_SETUP[SPI_DRIVER_0].SPI_Driver_clock_phase = SPI_DRIVER_CPHA_FIRST_CLOCK_TRANSITION;
+	SPI_CONF_SETUP[SPI_DRIVER_0].SPI_Driver_data_frame_format = SPI_DRIVER_8_BIT_DATA_FORMAT;
+	SPI_CONF_SETUP[SPI_DRIVER_0].SPI_Driver_frame_direction = SPI_DRIVER_MSB_FIRST;
+	SPI_CONF_SETUP[SPI_DRIVER_0].SPI_Driver_master_slave_selection = SPI_DRIVER_MASTER_CONFIGURATION;
+	SPI_CONF_SETUP[SPI_DRIVER_0].SPI_Driver_receive_only_or_full_duplex = SPI_DRIVER_FULL_DUPLEX;
+	SPI_CONF_SETUP[SPI_DRIVER_0].SPI_Driver_software_slave_management = OK;
+	SPI_CONF_SETUP[SPI_DRIVER_0].SPI_Driver_inetrnal_slave_select = OK;
+	SPI_CONF_SETUP[SPI_DRIVER_0].SPI_Driver_ss_output_enable = NOK;
+	SPI_CONF_SETUP[SPI_DRIVER_0].SPI_Driver_output_enable_in_bidirectional_mode = DEFAULT;
+	SPI_CONF_SETUP[SPI_DRIVER_0].SPI_Driver_bidirectional_data_mode_enable = SPI_DRIVER_2_LINE_UNIDIRECTIONAL_DATA_FLOW;
+	SPI_CONF_SETUP[SPI_DRIVER_0].SPI_Driver_crc_calculation_enable = NOK;
+*/}

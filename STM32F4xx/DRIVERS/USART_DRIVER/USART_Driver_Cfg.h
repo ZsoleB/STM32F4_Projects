@@ -1,0 +1,27 @@
+/*
+ * USART_Driver_Cfg.h
+ *
+ *  Created on: 9 apr. 2018
+ *      Author: Zsole
+ */
+
+#ifndef DRIVERS_USART_DRIVER_USART_DRIVER_CFG_H_
+#define DRIVERS_USART_DRIVER_USART_DRIVER_CFG_H_
+
+#include "USART_Driver.h"
+
+#define USART_DRIVER_INSTANCE_NUM 					((uint32)0x01)
+
+#define USART_DRIVER_USART1_SELECT					OK
+#define USART_DRIVER_USART2_SELECT					NOK
+#define USART_DRIVER_USART3_SELECT					NOK
+#define USART_DRIVER_USART4_SELECT					NOK
+#define USART_DRIVER_USART5_SELECT					NOK
+#define USART_DRIVER_USART6_SELECT					NOK
+
+typedef enum
+{
+	USART_DRIVER_1,
+}USART_Driver_Instances;
+
+#endif /* DRIVERS_USART_DRIVER_USART_DRIVER_CFG_H_ */

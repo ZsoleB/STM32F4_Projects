@@ -1,0 +1,5 @@
+RNG_Driver.c:10:6:RNG_Driver_Init	4	static
+RNG_Driver.c:27:7:RNG_Driver_Check_Random_number	16	static
+RNG_Driver.c:44:6:RNG_Driver_Clear_Staus	16	static
+RNG_Driver.c:49:7:RNG_Driver_Check_Staus	24	static
+RNG_Driver.c:65:8:RNG_Driver_Get_Random_number	4	static

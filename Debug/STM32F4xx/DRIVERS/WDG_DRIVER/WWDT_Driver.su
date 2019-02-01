@@ -1,0 +1,5 @@
+WWDT_Driver.c:33:6:WWDG_IRQHandler	8	static
+WWDT_Driver.c:42:6:WWDT_Driver_Init	4	static
+WWDT_Driver.c:60:6:WWDT_Driver_Refresh_WWDT_Counter	4	static
+WWDT_Driver.c:65:6:WWDT_Driver_SW_Reset	4	static
+WWDT_Driver.c:71:6:WWDT_Driver_Clear_Interrupt_Flag	4	static
