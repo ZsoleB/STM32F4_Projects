@@ -34,7 +34,7 @@ void WWDG_IRQHandler()
 {
 	WWDT_Driver_Refresh_WWDT_Counter();
 	WWDT_Driver_Clear_Interrupt_Flag();
-	GPIO_Driver_Lambda_function();
+	/*GPIO_Driver_Lambda_function();*/
 }
 
 #endif

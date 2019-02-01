@@ -79,15 +79,53 @@ void NVIC_Driver_PriorityGroupConfig(uint8 Prioritygroup)
 
 #if (NVIC_DRIVER_TIMER_INTERRUPT_ENABLE	== OK)
 
+	#include "TCNT_Driver_Cfg.h"
+
 	void NVIC_Driver_SetTimer_Update_Interrupt(uint8 Preemption_priority,uint8 Sub_priority)
 	{
+
+		#if ((TCNT_DRIVER_TIMER_14)==OK)
+			TIM14->DIER |=(TCNT_DRIVER_UPDATE_GENERATION);
+			NVIC_Driver_SetInterrupt(TIM8_TRG_COM_TIM14_IRQn,Preemption_priority,Sub_priority);
+		#endif
+
+		#if ((TCNT_DRIVER_TIMER_13)==OK)
+			TIM13->DIER |=(TCNT_DRIVER_UPDATE_GENERATION);
+			NVIC_Driver_SetInterrupt(TIM8_UP_TIM13_IRQn,Preemption_priority,Sub_priority);
+		#endif
+
+		#if ((TCNT_DRIVER_TIMER_12)==OK)
+			TIM12->DIER |=(TCNT_DRIVER_UPDATE_GENERATION);
+			NVIC_Driver_SetInterrupt(TIM8_BRK_TIM12_IRQn,Preemption_priority,Sub_priority);
+		#endif
+
+		#if ((TCNT_DRIVER_TIMER_11)==OK)
+			TIM11->DIER |=(TCNT_DRIVER_UPDATE_GENERATION);
+			NVIC_Driver_SetInterrupt(TIM1_TRG_COM_TIM11_IRQn,Preemption_priority,Sub_priority);
+		#endif
+
+		#if ((TCNT_DRIVER_TIMER_10)==OK)
+			TIM10->DIER |=(TCNT_DRIVER_UPDATE_GENERATION);
+			NVIC_Driver_SetInterrupt(TIM1_UP_TIM10_IRQn,Preemption_priority,Sub_priority);
+		#endif
+
+		#if ((TCNT_DRIVER_TIMER_9)==OK)
+			TIM9->DIER |=(TCNT_DRIVER_UPDATE_GENERATION);
+			NVIC_Driver_SetInterrupt(TIM1_BRK_TIM9_IRQn,Preemption_priority,Sub_priority);
+		#endif
+
+		#if ((TCNT_DRIVER_TIMER_5)==OK)
+			TIM5->DIER |=(TCNT_DRIVER_UPDATE_GENERATION);
+			NVIC_Driver_SetInterrupt(TIM5_IRQn,Preemption_priority,Sub_priority);
+		#endif
+
 		#if ((TCNT_DRIVER_TIMER_4)==OK)
-			TIM2->DIER |=(TCNT_DRIVER_UPDATE_GENERATION);
+			TIM4->DIER |=(TCNT_DRIVER_UPDATE_GENERATION);
 			NVIC_Driver_SetInterrupt(TIM4_IRQn,Preemption_priority,Sub_priority);
 		#endif
 
 		#if ((TCNT_DRIVER_TIMER_3)==OK)
-			TIM2->DIER |=(TCNT_DRIVER_UPDATE_GENERATION);
+			TIM3->DIER |=(TCNT_DRIVER_UPDATE_GENERATION);
 			NVIC_Driver_SetInterrupt(TIM3_IRQn,Preemption_priority,Sub_priority);
 		#endif
 
