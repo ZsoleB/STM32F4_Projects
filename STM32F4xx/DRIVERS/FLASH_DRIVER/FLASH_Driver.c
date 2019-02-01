@@ -162,7 +162,7 @@ void FLASH_Driver_Erease_Sector(uint32 SectorNumber)
 	while((FLASH->SR & (FLASH_DRIVER_BUSY_FLAG))!=0x00)
 	{/*No operation, wait until the busy bit is set*/}
 
-	/*Set new sector mask*/
+	/*Set new sector*/
 	FLASH->CR |= SectorNumber;
 	/*Set the sector erase operation*/
 	FLASH->CR |= FLASH_DRIVER_SECTOR_ERASE_OP;
