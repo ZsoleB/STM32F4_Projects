@@ -217,21 +217,21 @@ extern CAN_Driver_Setup_Type* CAN_SETUP;
 
 void CAN_Driver_Clear_Request_Completed_Flag(uint8 CAN_setup_nr,uint8 MailBox_Number);
 uint8 CAN_Driver_Check_Message_Pending(uint8 CAN_setup_nr,uint8 FIFO_Number);
-void CAN_Driver_DebugFreeze(uint8 CAN_setup_nr,);
-void CAN_Driver_Enter_NormalMode(uint8 CAN_setup_nr,);
-void CAN_Driver_Enter_SleepMode(uint8 CAN_setup_nr,);
+void CAN_Driver_DebugFreeze(uint8 CAN_setup_nr,uint8 option);
+void CAN_Driver_Enter_NormalMode(uint8 CAN_setup_nr);
+void CAN_Driver_Enter_SleepMode(uint8 CAN_setup_nr);
 void CAN_Driver_Init();
 void CAN_Driver_InitBuffer(CAN_Driver_Message *CAN_MSG);
-void CAN_Driver_Enter_InitMode(uint8 CAN_setup_nr,);
+void CAN_Driver_Enter_InitMode(uint8 CAN_setup_nr);
 void CAN_Driver_ModeChange(uint8 CAN_setup_nr,CAN_Driver_Operating_Modes Mode);
 void CAN_Driver_ReceiveMessage(uint8 CAN_setup_nr,CAN_Driver_Message *msg, uint8 MailBox_Number, uint8 FIFO_Number);
-void CAN_Driver_Reset(uint8 CAN_setup_nr,);
+void CAN_Driver_Reset(uint8 CAN_setup_nr);
 void CAN_Driver_Release_Rx_MailBox(uint8 CAN_setup_nr,uint8 FIFO_Number);
 void CAN_Driver_SendMessage(uint8 CAN_setup_nr,CAN_Driver_Message *msg,uint8 MailBox_Number);
 void CAN_Driver_SetFilter(uint8 CAN_setup_nr,uint32 ID,uint8 ID_type);
-void CAN_Driver_SetTestMode(uint8 CAN_setup_nr,);
+void CAN_Driver_SetTestMode(uint8 CAN_setup_nr);
 void CAN_Driver_SetBuffer(CAN_Driver_Message* arg, uint8 len, uint8* message);
-void CAN_Driver_Start(uint8 CAN_setup_nr,);
-void CAN_Driver_Wait_for_Ready(uint8 CAN_setup_nr,);
+void CAN_Driver_Start(uint8 CAN_setup_nr);
+void CAN_Driver_Wait_for_Ready(uint8 CAN_setup_nr);
 
 #endif /* DRIVERS_CAN_DRIVER_CAN_DRIVER_H_ */

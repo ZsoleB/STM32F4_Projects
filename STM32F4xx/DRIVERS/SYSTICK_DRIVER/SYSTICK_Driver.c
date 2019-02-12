@@ -34,16 +34,20 @@ void SysTick_Handler()
 void SYSTICK_Driver_Init()
 {
 	/*Set the processor clock as the clock source */
-	SysTick->CTRL|=(0x01<<0x02);
-	#if(SYSTICK_DRIVER_ENABLE_INTERRUPT == OK)
-		/*Set the timer interrupt and its priority and sub-priority*/
-		NVIC_Driver_PriorityGroupConfig(NVIC_DRIVER_PRIORITY_GRUP_4);
-		NVIC_Driver_Set_SYSTICK_Interrupt(0x0F,0x00);
-	#endif
+	SysTick->CTRL |= (0x01 << 0x02);
+#if(SYSTICK_DRIVER_ENABLE_INTERRUPT == OK)
+
+#if(NVIC_DRIVER_SYSTICK_INTERRUPT_ENABLE==OK)
+	/*Set the timer interrupt and its priority and sub-priority*/
+	NVIC_Driver_PriorityGroupConfig(NVIC_DRIVER_PRIORITY_GRUP_4);
+	NVIC_Driver_Set_SYSTICK_Interrupt(0x0F, 0x00);
+#endif
+
+#endif
 	/*Init the Systick current value register*/
 	SysTick->VAL = 0x00;
 	/*Set the load register with the configured value*/
-	SysTick->LOAD = ((SYSTICK_DRIVER_LOAD & 0xFFFFFFUL)-1);
+	SysTick->LOAD = ((SYSTICK_DRIVER_LOAD & 0xFFFFFFUL) - 1);
 }
 
 void SYSTICK_Driver_Start()

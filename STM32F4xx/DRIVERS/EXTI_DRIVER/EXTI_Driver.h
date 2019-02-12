@@ -10,6 +10,7 @@
 
 #include "stm32f4xx.h"
 #include "StdTypes.h"
+#include "NVIC_Driver_Cfg.h"
 
 #define EXTI_DRIVER_INTERRUPT_PIN_0						        0x00
 #define EXTI_DRIVER_INTERRUPT_PIN_1 					        0x01
@@ -34,6 +35,8 @@
 #define EXTI_DRIVER_INTERRUPT_PORT_E 					((uint8)0x04)
 #define EXTI_DRIVER_INTERRUPT_PORT_F                    ((uint8)0x05)
 #define EXTI_DRIVER_INTERRUPT_PORT_G                    ((uint8)0x06)
+#define EXTI_DRIVER_INTERRUPT_PORT_H                    ((uint8)0x07)
+#define EXTI_DRIVER_INTERRUPT_PORT_I                    ((uint8)0x08)
 
 void EXTI_Driver_Init(uint8 InterruptPinNumber,uint8 InterruptPortNumber);
 void EXTI_Driver_Generate_SWInterrupt(uint8 InterruptNumber);

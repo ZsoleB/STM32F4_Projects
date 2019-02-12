@@ -18,7 +18,7 @@
 #define OFF 				0x00
 #define SUCCES		((uint8)0x00)
 #define FAILED		((uint8)0x01)
-#define  				uint8_t
+#define uint8			uint8_t
 #define uint16			uint16_t
 #define uint32			uint32_t
 #define uint64			uint64_t

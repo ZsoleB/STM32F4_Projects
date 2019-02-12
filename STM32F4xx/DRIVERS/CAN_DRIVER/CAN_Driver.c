@@ -142,7 +142,7 @@ void CAN_Driver_Init()
 		{
 			CAN_SETUP[CAN_Driver_index].CAN_Driver_instance->MCR |= CAN_DRIVER_NON_AUTOMATIC_TRANSMISSION_MODE;
 		}
-		else if (CAN_DRIVER_TRANSMIT_PRIORITY == CAN_DRIVER_AUTOMATIC_TRANSMISSION_MODE)
+		else if (CAN_SETUP[CAN_Driver_index].CAN_Driver_transmission_mode == CAN_DRIVER_AUTOMATIC_TRANSMISSION_MODE)
 		{
 			CAN_SETUP[CAN_Driver_index].CAN_Driver_instance->MCR |= CAN_DRIVER_NON_AUTOMATIC_TRANSMISSION_MODE;
 		}
@@ -216,7 +216,7 @@ void CAN_Driver_Init()
 		{
 			/*Do nothing*/
 		}
-		((CAN_DRIVER_PERIPHERAL_FREQUENCY/(CAN_DRIVER_BIT_SEGMENT1+CAN_DRIVER_BIT_SEGMENT2+1))/CAN_DRIVER_FREQUENCY)
+
 		/*Set up the CAN bit timing registers*/
 		CAN_SETUP[CAN_Driver_index].CAN_Driver_instance->BTR &= CAN_DRIVER_BIT_TIMING_CLEAR_MASK;
 		/*set TSEG1*/
@@ -558,7 +558,7 @@ void CAN_Driver_Wait_for_Ready(uint8 CAN_setup_nr)
 		{
 			/*Do nothing*/
 		}
-		CAN_Driver_Tx_global_status->CAN_Driver_Tx1_Ready = 0x01;
+		/*CAN_Driver_Tx_global_status->CAN_Driver_Tx1_Ready = 0x01;*/
 	}
 	else if (CAN_SETUP[CAN_setup_nr].CAN_Driver_use_mailbox_2 == OK)
 	{
@@ -566,7 +566,7 @@ void CAN_Driver_Wait_for_Ready(uint8 CAN_setup_nr)
 		{
 			/*Do nothing*/
 		}
-		CAN_Driver_Tx_global_status->CAN_Driver_Tx2_Ready = 0x01;
+		/*CAN_Driver_Tx_global_status->CAN_Driver_Tx2_Ready = 0x01;*/
 	}
 	else
 	{

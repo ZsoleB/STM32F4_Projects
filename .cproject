@@ -45,6 +45,7 @@
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/USART_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/WDG_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/SYSTICK_DRIVER"/>
+									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/EXTI_DRIVER"/>
 								</option>
 								<inputType id="com.atollic.truestudio.as.input.1112908016" name="Input" superClass="com.atollic.truestudio.as.input"/>
 							</tool>
@@ -60,13 +61,14 @@
 									<listOptionValue builtIn="false" value="../Libraries/STM32F4xx_StdPeriph_Driver/inc"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS"/>
+									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/EXTI_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/GPIO_DRIVER"/>
-									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/NVIC_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/HWCRC_DRIVER"/>
+									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/NVIC_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/RNG_DRIVER"/>
+									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/SYSTICK_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/USART_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/WDG_DRIVER"/>
-									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/SYSTICK_DRIVER"/>
 								</option>
 								<option id="com.atollic.truestudio.common_options.target.endianess.672722434" name="Endianess" superClass="com.atollic.truestudio.common_options.target.endianess" useByScannerDiscovery="false"/>
 								<option id="com.atollic.truestudio.common_options.target.mcpu.1339538977" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" useByScannerDiscovery="false" value="STM32F429ZI" valueType="enumerated"/>
@@ -177,6 +179,7 @@
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/USART_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/WDG_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/SYSTICK_DRIVER"/>
+									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/EXTI_DRIVER"/>
 								</option>
 								<inputType id="com.atollic.truestudio.as.input.280053168" name="Input" superClass="com.atollic.truestudio.as.input"/>
 							</tool>
@@ -200,6 +203,7 @@
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/USART_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/WDG_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/SYSTICK_DRIVER"/>
+									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/EXTI_DRIVER"/>
 								</option>
 								<option id="com.atollic.truestudio.common_options.target.endianess.1710006207" name="Endianess" superClass="com.atollic.truestudio.common_options.target.endianess"/>
 								<option id="com.atollic.truestudio.common_options.target.mcpu.846962307" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" value="STM32F429ZI" valueType="enumerated"/>
