@@ -9,16 +9,16 @@
  ____________________________________________________________________________________________________
 |             |                                          |                                           |
 |Sync_Segment |       BIT segment1                       |           BIT segment2                    |
-|    	   	  |       			                         |                 			                 |
+|    	      |       			                 |                 			     |
  ----------------------------------------------------------------------------------------------------
- 1xtq				TBS1										TBS2
-														^									         ^
-														|                                            |
-												Sample point                    			Transmit Point
+ 1xtq		TBS1					   TBS2
+			                                 ^					      ^
+						         |                                            |
+		                                    Sample point                    		Transmit Point
 
- 	 	 	 	 1
+ 	 	    1
  BaudRate = ------------------
- 	 	 	 NominalBitTime
+ 	      NominalBitTime
 
  NominalBitTime = 1 x tq + tBS1 + tBS2
 
@@ -227,8 +227,8 @@ void CAN_Driver_Init()
 		CAN_SETUP[CAN_Driver_index].CAN_Driver_instance->BTR |= ((((CAN_SETUP[CAN_Driver_index].CAN_Driver_resynchronization_jump_width - 1) & 0x03) << 24));
 		/*set CAN pescaler*/
 		CAN_SETUP[CAN_Driver_index].CAN_Driver_instance->BTR |= (((CAN_BAUD_RATE_PRESCALER(CAN_SETUP[CAN_Driver_index].CAN_Driver_bit_segment1,
-																                           CAN_SETUP[CAN_Driver_index].CAN_Driver_bit_segment2,
-																						   CAN_SETUP[CAN_Driver_index].CAN_Driver_frequency) - 1) & 0x3FF));
+									                           CAN_SETUP[CAN_Driver_index].CAN_Driver_bit_segment2,
+												   CAN_SETUP[CAN_Driver_index].CAN_Driver_frequency) - 1) & 0x3FF));
 
 		/*Set up additional functionalities, ex. TestModes*/
 		if (CAN_SETUP[CAN_Driver_index].CAN_Driver_test_mode_enable == OK)
