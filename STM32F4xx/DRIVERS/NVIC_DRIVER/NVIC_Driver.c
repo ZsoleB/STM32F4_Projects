@@ -146,69 +146,69 @@ void NVIC_Driver_PriorityGroupConfig(uint8 Prioritygroup)
 	void NVIC_Driver_Set_EXTI_Interrupt(uint8 Preemption_priority,uint8 Sub_priority)
 	{
 
-	#ifdef NVIC_DRIVER_EXTI_0_FLAG
-				NVIC_Driver_SetInterrupt(EXTI0_IRQn,Preemption_priority,Sub_priority);
-	#endif
+#ifdef NVIC_DRIVER_EXTI_0_FLAG
+	NVIC_Driver_SetInterrupt(EXTI0_IRQn,Preemption_priority,Sub_priority);
+#endif
 
-	#ifdef NVIC_DRIVER_EXTI_1_FLAG
-				NVIC_Driver_SetInterrupt(EXTI1_IRQn,Preemption_priority,Sub_priority);
-	#endif
+#ifdef NVIC_DRIVER_EXTI_1_FLAG
+	NVIC_Driver_SetInterrupt(EXTI1_IRQn,Preemption_priority,Sub_priority);
+#endif
 
-	#ifdef NVIC_DRIVER_EXTI_2_FLAG
-			NVIC_Driver_SetInterrupt(EXTI2_IRQn,Preemption_priority,Sub_priority);
-	#endif
+#ifdef NVIC_DRIVER_EXTI_2_FLAG
+	NVIC_Driver_SetInterrupt(EXTI2_IRQn,Preemption_priority,Sub_priority);
+#endif
 
-	#ifdef NVIC_DRIVER_EXTI_3_FLAG
-					NVIC_Driver_SetInterrupt(EXTI3_IRQn,Preemption_priority,Sub_priority);
-	#endif
+#ifdef NVIC_DRIVER_EXTI_3_FLAG
+	NVIC_Driver_SetInterrupt(EXTI3_IRQn,Preemption_priority,Sub_priority);
+#endif
 
-	#ifdef NVIC_DRIVER_EXTI_4_FLAG
-			NVIC_Driver_SetInterrupt(EXTI4_IRQn,Preemption_priority,Sub_priority);
-	#endif
+#ifdef NVIC_DRIVER_EXTI_4_FLAG
+	NVIC_Driver_SetInterrupt(EXTI4_IRQn,Preemption_priority,Sub_priority);
+#endif
 
-	#ifdef NVIC_DRIVER_EXTI_5_FLAG
-			NVIC_Driver_SetInterrupt(EXTI9_5_IRQn,Preemption_priority,Sub_priority);
-	#endif
+#ifdef NVIC_DRIVER_EXTI_5_FLAG
+	NVIC_Driver_SetInterrupt(EXTI9_5_IRQn,Preemption_priority,Sub_priority);
+#endif
 
-	#ifdef NVIC_DRIVER_EXTI_6_FLAG
-			NVIC_Driver_SetInterrupt(EXTI9_5_IRQn,Preemption_priority,Sub_priority);
-	#endif
+#ifdef NVIC_DRIVER_EXTI_6_FLAG
+	NVIC_Driver_SetInterrupt(EXTI9_5_IRQn,Preemption_priority,Sub_priority);
+#endif
 
-	#ifdef NVIC_DRIVER_EXTI_7_FLAG
-			NVIC_Driver_SetInterrupt(EXTI9_5_IRQn,Preemption_priority,Sub_priority);
-	#endif
+#ifdef NVIC_DRIVER_EXTI_7_FLAG
+	NVIC_Driver_SetInterrupt(EXTI9_5_IRQn,Preemption_priority,Sub_priority);
+#endif
 
-	#ifdef NVIC_DRIVER_EXTI_8_FLAG
-			NVIC_Driver_SetInterrupt(EXTI9_5_IRQn,Preemption_priority,Sub_priority);
-	#endif
+#ifdef NVIC_DRIVER_EXTI_8_FLAG
+	NVIC_Driver_SetInterrupt(EXTI9_5_IRQn,Preemption_priority,Sub_priority);
+#endif
 
-	#ifdef NVIC_DRIVER_EXTI_9_FLAG
-			NVIC_Driver_SetInterrupt(EXTI9_5_IRQn,Preemption_priority,Sub_priority);
-	#endif
+#ifdef NVIC_DRIVER_EXTI_9_FLAG
+	NVIC_Driver_SetInterrupt(EXTI9_5_IRQn,Preemption_priority,Sub_priority);
+#endif
 
-	#ifdef NVIC_DRIVER_EXTI_10_FLAG
-			NVIC_Driver_SetInterrupt(EXTI15_10_IRQn,Preemption_priority,Sub_priority);
-	#endif
+#ifdef NVIC_DRIVER_EXTI_10_FLAG
+	NVIC_Driver_SetInterrupt(EXTI15_10_IRQn,Preemption_priority,Sub_priority);
+#endif
 
-	#ifdef NVIC_DRIVER_EXTI_11_FLAG
-			NVIC_Driver_SetInterrupt(EXTI15_10_IRQn,Preemption_priority,Sub_priority);
-	#endif
+#ifdef NVIC_DRIVER_EXTI_11_FLAG
+	NVIC_Driver_SetInterrupt(EXTI15_10_IRQn,Preemption_priority,Sub_priority);
+#endif
 
-	#ifdef NVIC_DRIVER_EXTI_12_FLAG
-			NVIC_Driver_SetInterrupt(EXTI15_10_IRQn,Preemption_priority,Sub_priority);
-	#endif
+#ifdef NVIC_DRIVER_EXTI_12_FLAG
+	NVIC_Driver_SetInterrupt(EXTI15_10_IRQn,Preemption_priority,Sub_priority);
+#endif
 
-	#ifdef NVIC_DRIVER_EXTI_13_FLAG
-			NVIC_Driver_SetInterrupt(EXTI15_10_IRQn,Preemption_priority,Sub_priority);
-	#endif
+#ifdef NVIC_DRIVER_EXTI_13_FLAG
+	NVIC_Driver_SetInterrupt(EXTI15_10_IRQn,Preemption_priority,Sub_priority);
+#endif
 
-	#ifdef NVIC_DRIVER_EXTI_14_FLAG
-			NVIC_Driver_SetInterrupt(EXTI15_10_IRQn,Preemption_priority,Sub_priority);
-	#endif
+#ifdef NVIC_DRIVER_EXTI_14_FLAG
+	NVIC_Driver_SetInterrupt(EXTI15_10_IRQn,Preemption_priority,Sub_priority);
+#endif
 
-	#ifdef NVIC_DRIVER_EXTI_15_FLAG
-			NVIC_Driver_SetInterrupt(EXTI15_10_IRQn,Preemption_priority,Sub_priority);
-	#endif
+#ifdef NVIC_DRIVER_EXTI_15_FLAG
+	NVIC_Driver_SetInterrupt(EXTI15_10_IRQn,Preemption_priority,Sub_priority);
+#endif
 	}
 #endif
 

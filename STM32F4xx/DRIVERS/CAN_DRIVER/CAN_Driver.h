@@ -73,7 +73,7 @@
 /*
 
  In mask mode the identifier registers are associated with mask registers specifying which
- bits of the identifier are handled as “must match” or as “don’t care”. Can be used when frame
+ bits of the identifier are handled as ï¿½must matchï¿½ or as ï¿½donï¿½t careï¿½. Can be used when frame
  groups are used not single frames.
 
  */
