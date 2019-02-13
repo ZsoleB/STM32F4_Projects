@@ -1,8 +1,8 @@
 ADC_Driver.c:10:6:ADC_Driver_Init	24	static
-ADC_Driver.c:114:8:ADC_Driver_GetSample	24	static
-ADC_Driver.c:121:7:ADC_Driver_GetStatus	16	static
-ADC_Driver.c:133:6:ADC_Driver_ClearStatus	16	static
-ADC_Driver.c:138:6:ADC_Driver_Off	16	static
-ADC_Driver.c:143:6:ADC_Driver_On	16	static
-ADC_Driver.c:148:6:ADC_Driver_StartSampling	16	static
-ADC_Driver.c:154:7:ADC_Driver_SetChannel	16	static
+ADC_Driver.c:116:8:ADC_Driver_GetSample	24	static
+ADC_Driver.c:123:7:ADC_Driver_GetStatus	24	static
+ADC_Driver.c:139:6:ADC_Driver_ClearStatus	16	static
+ADC_Driver.c:144:6:ADC_Driver_Off	16	static
+ADC_Driver.c:149:6:ADC_Driver_On	16	static
+ADC_Driver.c:154:6:ADC_Driver_StartSampling	16	static
+ADC_Driver.c:159:6:ADC_Driver_Set_Prescale_Value	4	static

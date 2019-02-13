@@ -18,12 +18,19 @@ void ADC_Driver_Init()
 	#if ADC_DRIVER_ADC2 == OK
 		RCC->APB2ENR|=RCC_APB2ENR_ADC2EN;
 	#endif
+	#if ADC_DRIVER_ADC3 == NOK
+		RCC->APB2ENR|=RCC_APB2ENR_ADC3EN;
+	#endif
+
+	/*Stop all ADCs in case of initialization*/
+	ADC1->CR2 &= ADC_DRIVER_OFF;
+	ADC2->CR2 &= ADC_DRIVER_OFF;
+	ADC3->CR2 &= ADC_DRIVER_OFF;
+
+	ADC_Driver_Set_Prescale_Value();
 
 	for(index=0x00;index<ADC_DRIVER_INSTANCE_NUM;index++)
 	{
-		/*Select the frequency of the clock to the ADCs*/
-		RCC->CFGR |= ADC_DRIVER_PRESCALE;
-
 		if (ADC_SETUP[index].ADC_Single_Conversion == OK)
 		{
 
@@ -31,38 +38,42 @@ void ADC_Driver_Init()
 			setting the ADON bit in the ADC_CR2 register (for a regular channel only) or by external
 			trigger (for a regular or injected channel), while the CONT bit is 0.*/
 
-			ADC_SETUP[index].ADC_Instance->CR2|=ADC_DRIVER_EXTERNAL_TRIGGER_ENABLE|ADC_DRIVER_EXTERNAL_TRIGGER_SWSTART;
+			ADC_SETUP[index].ADC_Instance->CR2 &= (~ADC_DRIVER_CONTINUOUS_CONVERSION);
 
+		}
+		else if(ADC_SETUP[index].ADC_Single_Conversion == NOK)
+		{
+			ADC_SETUP[index].ADC_Instance->CR2 |= ADC_DRIVER_CONTINUOUS_CONVERSION;
+		}
+		else
+		{
+			/*Nothing to do*/
 		}
 
 		/*Set the alignment*/
-
 		ADC_SETUP[index].ADC_Instance->CR2|=ADC_SETUP[index].ADC_Alignment;
+
+		/*The selected resolution (options 12bit,10bit,8bit,6bit) */
+		ADC_SETUP[index].ADC_Instance->CR1|= ADC_SETUP[index].ADC_Resolution;
 
 		if (ADC_SETUP[index].ADC_Discontinuous_Mode == OK)
 		{
 			/*Discontinuous read for multiple channels, each channel will be read
 	  		  sequentially one by one after the order given in SQRx.
-	  		  Because DISCNUM=0x00 only one channel will be read at once,
+	  		  If DISCNUM=0x00, only one channel will be read at once,
 	  		  otherwise (DISCNUM=n) n reads will be made.
 			 */
 
 			ADC_SETUP[index].ADC_Instance->CR1|=ADC_DRIVER_DISCONTINUOUS_MODE_ENABLE;
-
 		}
 
 		/*Select the chosen channel's sampling time*/
 		/*The sampling is used for the calculation of the conversion time
 
-		  Tconv = (12.5 + Sampling_time)
+		  Tconv = (12 + Sampling_time)*(1/ADCCLK)
 		  Sampling_Frequency = 1/Tconv
-
-		 *Example:
-			With an ADCCLK = 14 MHz and a sampling time of 1.5 cycles:
-			Tconv = 1.5 + 12.5 = 14 cycles = 1 µs
-
-			The default is 1.5 cycles
-		 */
+		  The default is 3 cycles
+		*/
 
 		/*Check the selected ADC instance channel numbers, assign the sampling times and the sequences according to the data sheet. */
 
@@ -76,13 +87,14 @@ void ADC_Driver_Init()
 				ADC_SETUP[index].ADC_Instance->SMPR1|=((uint32_t)(ADC_SETUP[index].ADC_Channel_SampligTime[index1]<<(3*(ADC_SETUP[index].ADC_Channels[index1]-0x0A))));
 			}
 
-			#if(ADC_DRIVER_SEQUENTIAL_READ == OK)
+			if(ADC_SETUP[index].ADC_Sequence_Length > ADC_DRIVER_SEQUENCE_1_CONVERSION)
+			{
 
-				if(ADC_SETUP[index].ADC_Channel_Position[index1]<=0x05)
+				if(ADC_SETUP[index].ADC_Channel_Position[index1]<=ADC_DRIVER_SEQUENCE_POSITION_6)
 				{
 					ADC_SETUP[index].ADC_Instance->SQR3|=((ADC_SETUP[index].ADC_Channels[index1])<<(5*ADC_SETUP[index].ADC_Channel_Position[index1]));
 				}
-				else if((ADC_SETUP[index].ADC_Channel_Position[index1]>0x05) && (ADC_SETUP[index].ADC_Channel_Position[index1]<=0x0B))
+				else if((ADC_SETUP[index].ADC_Channel_Position[index1]>ADC_DRIVER_SEQUENCE_POSITION_6) && (ADC_SETUP[index].ADC_Channel_Position[index1]<=ADC_DRIVER_SEQUENCE_POSITION_12))
 				{
 					ADC_SETUP[index].ADC_Instance->SQR2|=((ADC_SETUP[index].ADC_Channels[index1])<<(5*(ADC_SETUP[index].ADC_Channel_Position[index1]-0x06)));
 				}
@@ -90,25 +102,15 @@ void ADC_Driver_Init()
 				{
 					ADC_SETUP[index].ADC_Instance->SQR1|=((ADC_SETUP[index].ADC_Channels[index1])<<(5*(ADC_SETUP[index].ADC_Channel_Position[index1]-0x0C)));
 				}
-
-			#endif
+			}else
+			{
+				ADC_SETUP[index].ADC_Instance->SQR3|= ADC_SETUP[index].ADC_Channels[index1];
+			}
 		}
-
-		/*Set the regular channel sequence length*/
-		ADC_SETUP[index].ADC_Instance->SQR1|=ADC_SETUP[index].ADC_Sequence_Length ;
 
 		/*Start the ADC*/
 		ADC_Driver_On(index);
-
-		/*Reset calibration*/
-		ADC_SETUP[index].ADC_Instance->CR2|=ADC_DRIVER_RESET_CALLIBRATION;
-		while(((ADC_SETUP[index].ADC_Instance->CR2) & ADC_DRIVER_RESET_CALLIBRATION )!=0x00){}
-
-		/*Calibration*/
-		ADC_SETUP[index].ADC_Instance->CR2|=ADC_DRIVER_CALLIBRATION;
-		while(((ADC_SETUP[index].ADC_Instance->CR2) & ADC_DRIVER_CALLIBRATION)!=0x00){}
 	}
-
 }
 
 uint16 ADC_Driver_GetSample(uint8 ADC_Instance_Number)
@@ -120,14 +122,18 @@ uint16 ADC_Driver_GetSample(uint8 ADC_Instance_Number)
 
 uint8 ADC_Driver_GetStatus(uint8 ADC_Instance_Number,uint8 Event)
 {
+	uint8 ResultCode = 0x00;
+
 	if((ADC_SETUP[ADC_Instance_Number].ADC_Instance->SR & Event)!=FALSE)
 	{
-		return SUCCES;
+		ResultCode = SUCCES;
 	}
 	else
 	{
-		return FAILED;
+		ResultCode = FAILED;
 	}
+
+	return ResultCode;
 }
 
 void ADC_Driver_ClearStatus(uint8 ADC_Instance_Number)
@@ -150,18 +156,9 @@ void ADC_Driver_StartSampling(uint8 ADC_Instance_Number)
 	ADC_SETUP[ADC_Instance_Number].ADC_Instance->CR2|=ADC_DRIVER_REGULAR_START;
 }
 
-#if(ADC_DRIVER_SEQUENTIAL_READ == OK)
-	void ADC_Driver_SetChannel(uint8 ADC_Instance_Number,uint8 ChannelNumber)
-	{
-		/*If Sequnetial Read is used this function isn't needed*/
-	}
-
-#else
-
-	void ADC_Driver_SetChannel(uint8 ADC_Instance_Number,uint8 ChannelNumber)
-	{
-		/*Set the desired channel to the sequence register (only the 1st sequence is used in this case)*/
-		ADC_SETUP[ADC_Instance_Number].ADC_Instance->SQR3 |= ChannelNumber;
-	}
-
-#endif
+void ADC_Driver_Set_Prescale_Value()
+{
+	/*Set and cleared by software to select the frequency of the clock to the ADC. The clock is
+	common for all the ADCs.*/
+	ADC->CCR|=ADC_DRIVER_REGULAR_START;
+}

@@ -1899,45 +1899,45 @@ Discarded input sections
  .data          0x00000000        0x0 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
  .bss           0x00000000        0x0 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
  .text.ADC_Driver_Init
-                0x00000000      0x484 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
+                0x00000000      0x4c4 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
  .text.ADC_Driver_GetSample
                 0x00000000       0x38 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
  .text.ADC_Driver_GetStatus
-                0x00000000       0x44 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
+                0x00000000       0x4c STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
  .text.ADC_Driver_ClearStatus
                 0x00000000       0x30 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
  .text.ADC_Driver_Off
-                0x00000000       0x44 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
+                0x00000000       0x48 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
  .text.ADC_Driver_On
                 0x00000000       0x48 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
  .text.ADC_Driver_StartSampling
                 0x00000000       0x48 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
- .text.ADC_Driver_SetChannel
-                0x00000000       0x1c STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
- .debug_info    0x00000000      0x5d8 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
- .debug_abbrev  0x00000000      0x139 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
+ .text.ADC_Driver_Set_Prescale_Value
+                0x00000000       0x20 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
+ .debug_info    0x00000000      0x60e STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
+ .debug_abbrev  0x00000000      0x14f STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
  .debug_aranges
                 0x00000000       0x58 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
  .debug_ranges  0x00000000       0x48 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
- .debug_line    0x00000000      0x2ab STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
- .debug_str     0x00000000      0x54d STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
+ .debug_line    0x00000000      0x2a8 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
+ .debug_str     0x00000000      0x574 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
  .comment       0x00000000       0x7d STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
- .debug_frame   0x00000000      0x154 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
+ .debug_frame   0x00000000      0x14c STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
  .ARM.attributes
                 0x00000000       0x39 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
  .text          0x00000000        0x0 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver_Cfg.o
  .data          0x00000000        0x0 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver_Cfg.o
  .bss           0x00000000        0x0 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver_Cfg.o
  .data.ADC_CONF_SETUP
-                0x00000000       0x38 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver_Cfg.o
+                0x00000000       0x3c STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver_Cfg.o
  .data.ADC_SETUP
                 0x00000000        0x4 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver_Cfg.o
- .debug_info    0x00000000      0x2c7 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver_Cfg.o
+ .debug_info    0x00000000      0x2d3 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver_Cfg.o
  .debug_abbrev  0x00000000       0xe9 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver_Cfg.o
  .debug_aranges
                 0x00000000       0x18 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver_Cfg.o
  .debug_line    0x00000000      0x1b9 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver_Cfg.o
- .debug_str     0x00000000      0x366 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver_Cfg.o
+ .debug_str     0x00000000      0x375 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver_Cfg.o
  .comment       0x00000000       0x7d STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver_Cfg.o
  .ARM.attributes
                 0x00000000       0x39 STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver_Cfg.o
@@ -3224,7 +3224,7 @@ ADC_Driver_GetStatus                              STM32F4xx\DRIVERS\ADC_DRIVER\A
 ADC_Driver_Init                                   STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
 ADC_Driver_Off                                    STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
 ADC_Driver_On                                     STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
-ADC_Driver_SetChannel                             STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
+ADC_Driver_Set_Prescale_Value                     STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
 ADC_Driver_StartSampling                          STM32F4xx\DRIVERS\ADC_DRIVER\ADC_Driver.o
 ADC_EOCOnEachRegularChannelCmd                    Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o
 ADC_ExternalTrigInjectedConvConfig                Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o
