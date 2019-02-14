@@ -7,7 +7,7 @@
 
 #include "EXTI_Driver_Cfg.h"
 
-void EXTI_Driver_Init(uint8 InterruptPinNumber, uint8 InterruptPortNumber)
+void EXTI_Driver_Init(uint8 InterruptPinNumber, uint8 InterruptPortNumber, uint8 Action_Section)
 {
 	RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;
 
@@ -83,7 +83,7 @@ void EXTI_Driver_Init(uint8 InterruptPinNumber, uint8 InterruptPortNumber)
 		}
 	}
 
-#if(EXTI_DRIVER_INTERRUPT_MODE==OK)
+#if(EXTI_DRIVER_INTERRUPT_MODE == OK)
 	NVIC_Driver_PriorityGroupConfig(NVIC_DRIVER_PRIORITY_GRUP_3);
 	NVIC_Driver_Set_EXTI_Interrupt(((uint8) 0x01), ((uint8) 0x01));
 #endif

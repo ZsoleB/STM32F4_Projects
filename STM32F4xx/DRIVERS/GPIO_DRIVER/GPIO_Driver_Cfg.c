@@ -12,7 +12,7 @@ GPIO_Driver_Setup_Type GPIO_CONF_SETUP[GPIO_DRIVER_INSTANCE_NUM]=
 	{
 			GPIOA,
 			0x01,
-			{0x00},
+			{0x01},
 			{GPIO_DRIVER_MODE_INPUT},
 			{DEFAULT},
 			{DEFAULT},

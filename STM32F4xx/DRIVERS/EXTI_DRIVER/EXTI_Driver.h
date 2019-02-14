@@ -10,6 +10,7 @@
 
 #include "stm32f4xx.h"
 #include "StdTypes.h"
+#include "NVIC_Driver.h"
 
 /*Pin will register in the interrupt mask register.
  When the correct conditions are met, the PR will be set and the
@@ -47,7 +48,7 @@
 #define EXTI_DRIVER_INTERRUPT_PORT_H                    ((uint8)0x07)
 #define EXTI_DRIVER_INTERRUPT_PORT_I                    ((uint8)0x08)
 
-void EXTI_Driver_Init(uint8 InterruptPinNumber,uint8 InterruptPortNumber);
+void EXTI_Driver_Init(uint8 InterruptPinNumber,uint8 InterruptPortNumber,uint8 Action_Section);
 void EXTI_Driver_Generate_SWInterrupt(uint8 InterruptNumber);
 void EXTI_Driver_Clear_PendingInterrupt(uint8 InterruptNumber);
 void EXTI_Driver_Rising_Trigger_Select(uint8 InterruptNumber);

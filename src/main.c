@@ -12,9 +12,6 @@ void EXTI1_IRQHandler()
 
 int main()
 {
-	SYSTICK_Driver_Init();
-	SYSTICK_Driver_Start();
-
 	GPIO_Driver_Init();
 	EXTI_Driver_Init(EXTI_DRIVER_INTERRUPT_PIN_1,EXTI_DRIVER_INTERRUPT_PORT_A,EXTI_DRIVER_INTERRUPT_ACTION);
 	EXTI_Driver_Rising_Trigger_Select(EXTI_DRIVER_INTERRUPT_PIN_1);
