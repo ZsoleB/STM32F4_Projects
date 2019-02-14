@@ -7,68 +7,119 @@
 
 #include "EXTI_Driver_Cfg.h"
 
-void EXTI_Driver_Init(uint8 InterruptPinNumber,uint8 InterruptPortNumber)
+void EXTI_Driver_Init(uint8 InterruptPinNumber, uint8 InterruptPortNumber)
 {
-	RCC->APB2ENR|=RCC_APB2ENR_SYSCFGEN;
+	RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;
 
 	if (InterruptPinNumber < 0x04)
 	{
-		SYSCFG->EXTICR[0] |= (InterruptPortNumber<<(4*InterruptPinNumber));
-		EXTI->IMR |= ((0x01)<<InterruptPinNumber);
+		SYSCFG->EXTICR[0] |= (InterruptPortNumber << (4 * InterruptPinNumber));
+		if (Action_Section == EXTI_DRIVER_INTERRUPT_ACTION)
+		{
+			EXTI->IMR |= ((0x01) << InterruptPinNumber);
+		}
+
+		else if (Action_Section == EXTI_DRIVER_EVENT_ACTION)
+		{
+			EXTI->EMR |= ((0x01) << InterruptPinNumber);
+		}
+		else
+		{
+			/*Nothing to do*/
+		}
 	}
 
-	else if ((InterruptPinNumber < 0x08)&&(InterruptPinNumber >= 0x04))
+	else if ((InterruptPinNumber < 0x08) && (InterruptPinNumber >= 0x04))
 	{
-		SYSCFG->EXTICR[1] |= (InterruptPortNumber<<(4*(InterruptPinNumber-0x04)));
-		EXTI->IMR |= ((0x01)<<InterruptPinNumber);
+		SYSCFG->EXTICR[1] |= (InterruptPortNumber << (4 * (InterruptPinNumber - 0x04)));
+		if (Action_Section == EXTI_DRIVER_INTERRUPT_ACTION)
+		{
+			EXTI->IMR |= ((0x01) << InterruptPinNumber);
+		}
+
+		else if (Action_Section == EXTI_DRIVER_EVENT_ACTION)
+		{
+			EXTI->EMR |= ((0x01) << InterruptPinNumber);
+		}
+		else
+		{
+			/*Nothing to do*/
+		}
 	}
 
 	if ((InterruptPinNumber < 0x0C) && (InterruptPinNumber >= 0x08))
 	{
-		SYSCFG->EXTICR[2] |= (InterruptPortNumber<<(4*(InterruptPinNumber-0x08)));
-		EXTI->IMR |= ((0x01)<<InterruptPinNumber);
+		SYSCFG->EXTICR[2] |= (InterruptPortNumber << (4 * (InterruptPinNumber - 0x08)));
+		if (Action_Section == EXTI_DRIVER_INTERRUPT_ACTION)
+		{
+			EXTI->IMR |= ((0x01) << InterruptPinNumber);
+		}
+
+		else if (Action_Section == EXTI_DRIVER_EVENT_ACTION)
+		{
+			EXTI->EMR |= ((0x01) << InterruptPinNumber);
+		}
+		else
+		{
+			/*Nothing to do*/
+		}
 	}
 
 	if (InterruptPinNumber >= 0x0C)
 	{
-		SYSCFG->EXTICR[3] |= (InterruptPortNumber<<(4*(InterruptPinNumber-0x0C)));
-		EXTI->IMR |= ((0x01)<<InterruptPinNumber);
+		SYSCFG->EXTICR[3] |= (InterruptPortNumber << (4 * (InterruptPinNumber - 0x0C)));
+		if (Action_Section == EXTI_DRIVER_INTERRUPT_ACTION)
+		{
+			EXTI->IMR |= ((0x01) << InterruptPinNumber);
+		}
+
+		else if (Action_Section == EXTI_DRIVER_EVENT_ACTION)
+		{
+			EXTI->EMR |= ((0x01) << InterruptPinNumber);
+		}
+		else
+		{
+			/*Nothing to do*/
+		}
 	}
 
-#if(NVIC_DRIVER_EXTI_INTERRUPT_ENABLE==OK)
+#if(EXTI_DRIVER_INTERRUPT_MODE==OK)
 	NVIC_Driver_PriorityGroupConfig(NVIC_DRIVER_PRIORITY_GRUP_3);
-	NVIC_Driver_Set_EXTI_Interrupt(((uint8)0x01),((uint8)0x01));
+	NVIC_Driver_Set_EXTI_Interrupt(((uint8) 0x01), ((uint8) 0x01));
 #endif
 }
 
 void EXTI_Driver_Rising_Trigger_Select(uint8 InterruptNumber)
 {
-	EXTI->RTSR|=((0x01)<<InterruptNumber);
+	EXTI->RTSR |= ((0x01) << InterruptNumber);
 }
 
 void EXTI_Driver_Rising_Trigger_Clear(uint8 InterruptNumber)
 {
-	EXTI->RTSR &=~(((0x01)<<InterruptNumber));
+	EXTI->RTSR &= ~(((0x01) << InterruptNumber));
 }
 
 void EXTI_Driver_Falling_Trigger_Select(uint8 InterruptNumber)
 {
-	EXTI->FTSR|=((0x01)<<InterruptNumber);
+	EXTI->FTSR |= ((0x01) << InterruptNumber);
 }
 
 void EXTI_Driver_Falling_Trigger_Clear(uint8 InterruptNumber)
 {
-	EXTI->FTSR &= ~(((0x01)<<InterruptNumber));
+	EXTI->FTSR &= ~(((0x01) << InterruptNumber));
 }
 void EXTI_Driver_Generate_SWInterrupt(uint8 InterruptNumber)
 {
-	if((EXTI->EMR & (0x01<<InterruptNumber))!=0x00)
+	/*If the interrupt is enabled on this line in the EXTI_IMR, writing a '1' to this bit when it is set to
+	 '0' sets the corresponding pending bit in EXTI_PR resulting in an interrupt request
+	 generation.*/
+	if ((EXTI->IMR & (0x01 << InterruptNumber)) != 0x00)
 	{
-		EXTI->SWIER|=((0x01)<<InterruptNumber);
+		EXTI->SWIER |= ((0x01) << InterruptNumber);
 	}
 }
 
 void EXTI_Driver_Clear_PendingInterrupt(uint8 InterruptNumber)
 {
-	EXTI->PR|=((0x01)<<InterruptNumber);
+	EXTI->PR |= ((0x01) << InterruptNumber);
 }

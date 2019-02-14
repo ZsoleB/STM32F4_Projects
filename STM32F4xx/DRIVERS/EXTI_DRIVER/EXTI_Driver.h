@@ -10,7 +10,16 @@
 
 #include "stm32f4xx.h"
 #include "StdTypes.h"
-#include "NVIC_Driver_Cfg.h"
+
+/*Pin will register in the interrupt mask register.
+ When the correct conditions are met, the PR will be set and the
+ ISR will be called. The PR must be cleared by writing 1 to it.*/
+#define EXTI_DRIVER_INTERRUPT_ACTION							0x00
+
+/*Pin will register in the interrupt mask register.
+ When the correct conditions are met, an event will be sent but,
+ the PR will not be set and the ISR will not be called.*/
+#define EXTI_DRIVER_EVENT_ACTION								0x01
 
 #define EXTI_DRIVER_INTERRUPT_PIN_0						        0x00
 #define EXTI_DRIVER_INTERRUPT_PIN_1 					        0x01
