@@ -15,18 +15,17 @@
 #define ADC_DRIVER_ADC2 					NOK
 #define ADC_DRIVER_ADC3 					NOK
 #define ADC_DRIVER_ANALOG_WATCHDOG 			NOK
-#define ADC_DRIVER_PRESCALE 				ADC_DRIVER_PRESCALE_BY_2
+#define ADC_DRIVER_PRESCALE 				ADC_DRIVER_PRESCALE_BY_4
 #define ADC_DRIVER_INSTANCE_NUM 			((uint32)0x01)
 
 typedef enum
 {
-	ADC_DRIVER_0
+	ADC_DRIVER_1
 }ADC_Driver_Instances;
 
 typedef enum
 {
-	ADC_DRIVER_0_CHANNEL_1,
-	ADC_DRIVER_0_CHANNEL_2,
+	ADC_DRIVER_1_CHANNEL_1,
 }ADC_Driver_Channel_Instances;
 
 #endif /* ADC_DRIVER_CFG_H_ */

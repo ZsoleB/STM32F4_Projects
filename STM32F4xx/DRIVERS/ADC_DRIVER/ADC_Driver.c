@@ -18,7 +18,7 @@ void ADC_Driver_Init()
 	#if ADC_DRIVER_ADC2 == OK
 		RCC->APB2ENR|=RCC_APB2ENR_ADC2EN;
 	#endif
-	#if ADC_DRIVER_ADC3 == NOK
+	#if ADC_DRIVER_ADC3 == OK
 		RCC->APB2ENR|=RCC_APB2ENR_ADC3EN;
 	#endif
 
@@ -116,7 +116,7 @@ void ADC_Driver_Init()
 uint16 ADC_Driver_GetSample(uint8 ADC_Instance_Number)
 {
 	uint16 data=0x00;
-	data = ((uint16)(ADC_SETUP[ADC_Instance_Number].ADC_Instance->DR));
+	data = (((uint16)(ADC_SETUP[ADC_Instance_Number].ADC_Instance->DR))>>1);
 	return data;
 }
 
@@ -160,5 +160,5 @@ void ADC_Driver_Set_Prescale_Value()
 {
 	/*Set and cleared by software to select the frequency of the clock to the ADC. The clock is
 	common for all the ADCs.*/
-	ADC->CCR|=ADC_DRIVER_REGULAR_START;
+	ADC->CCR|=ADC_DRIVER_PRESCALE;
 }

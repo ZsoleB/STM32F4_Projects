@@ -12,12 +12,6 @@
 #include "StdTypes.h"
 #include "GPIO_Driver_Cfg.h"
 
-#define SPI_DRIVER_SLAVE_SELECT_PORT								GPIO_DRIVER_PORTB
-#define SPI_DRIVER_SLAVE_SELECT_PIN									0x01
-#define SPI_DRIVER_COMMUNICATION_PORT								GPIO_DRIVER_PORTA
-#define SPI_DRIVER_MISO_PIN											0x06
-#define SPI_DRIVER_MOSI_PIN											0x07
-#define SPI_DRIVER_SCK_PIN											0x05
 #define SPI_DRIVER_2_LINE_UNIDIRECTIONAL_DATA_FLOW					(((uint8)0x00)<<0x0F)
 #define SPI_DRIVER_1_LINE_BIDIRECTIONAL_DATA_FLOW                   (((uint8)0x01)<<0x0F)
 #define SPI_DRIVER_SOFTWARE_SLAVE_MANAGEMENT_CONFIG					(0x01<<0x09)
@@ -27,10 +21,14 @@
 #define SPI_DRIVER_TRANSMIT_ONLY_MODE                               (((uint8)0x01)<<0x0E)
 #define SPI_DRIVER_8_BIT_DATA_FORMAT                                (((uint8)0x00)<<0x0B)
 #define SPI_DRIVER_16_BIT_DATA_FORMAT                               (((uint8)0x01)<<0x0B)
+
 /*Receive and Transmit*/
 #define SPI_DRIVER_FULL_DUPLEX                                      (((uint8)0x00)<<0x0A)
+
 /*Receive only mode*/
 #define SPI_DRIVER_OUTPUT_DISABLED                                  (((uint8)0x01)<<0x0A)
+#define SPI_DRIVER_MOTOROLA_MODE                                    (((uint8)0x00)<<0x07)
+#define SPI_DRIVER_TI_MODE                                        	(((uint8)1x00)<<0x07)
 #define SPI_DRIVER_MSB_FIRST                                        (((uint8)0x00)<<0x07)
 #define SPI_DRIVER_LSB_FIRST                                        (((uint8)0x01)<<0x07)
 #define SPI_DRIVER_BAUD_RATE_DIV2                                   (((uint8)0x00)<<0x03)
@@ -50,6 +48,7 @@
 #define SPI_DRIVER_CPHA_FIRST_CLOCK_TRANSITION                      ((uint8)0x00)
 #define SPI_DRIVER_CPHA_SECOND_CLOCK_TRANSITION                     ((uint8)0x01)
 #define SPI_DRIVER_CRC_POLYNOME										 ((uint16)0x0888)
+#define SPI_DRIVER_FRAME_FORMAT_ERROR_FLAG                           ((uint16)0x0100)
 #define SPI_DRIVER_BUSY_FLAG                                         ((uint16)0x0080)
 #define SPI_DRIVER_OVERRUN_FLAG                                      ((uint16)0x0040)
 #define SPI_DRIVER_MODE_FAULT                                        ((uint16)0x0020)
@@ -75,6 +74,7 @@ typedef struct
 	uint8 SPI_Driver_clock_phase;
 	uint8 SPI_Driver_data_frame_format;
 	uint8 SPI_Driver_frame_direction;
+	uint8 SPI_Driver_frame_mode;
 	uint8 SPI_Driver_master_slave_selection;
 	uint8 SPI_Driver_receive_only_or_full_duplex;
 	uint8 SPI_Driver_software_slave_management;
@@ -88,7 +88,6 @@ typedef struct
 extern SPI_Driver_Setup_Type* SPI_SETUP;
 
 void SPI_Driver_Init();
-void SPI_Driver_Init_Cfg();
 uint8 SPI_Driver_Get_Status(uint8 SPI_setup_nr,uint16 StatusCode);
 uint16 SPI_Driver_Send_Data(uint8 SPI_setup_nr,uint16 data);
 uint16 SPI_Driver_Transcieve_Data(uint8 SPI_setup_nr,uint16 data);

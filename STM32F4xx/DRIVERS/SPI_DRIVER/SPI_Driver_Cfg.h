@@ -17,7 +17,7 @@
 
 typedef enum
 {
-	SPI_DRIVER_0
+	SPI_DRIVER_1
 }SPI_Driver_Instances;
 
 #endif /* DRIVERS_SPI_DRIVER_SPI_DRIVER_CFG_H_ */

@@ -12,8 +12,6 @@
 
 void SPI_Driver_Init()
 {
-	SPI_Driver_Init_Cfg();
-
 	uint16 index = 0x00;
 
 	#if(SPI_DRIVER_SPI1 == OK)
@@ -56,7 +54,8 @@ void SPI_Driver_Init()
 
 		if (SPI_SETUP[index].SPI_Driver_ss_output_enable == OK)
 		{
-			SPI_SETUP[index].SPI_Instance->CR2|=SPI_DRIVER_SS_OUTPUT_ENABLE_CONFIG;
+			SPI_SETUP[index].SPI_Instance->CR2|=(SPI_DRIVER_SS_OUTPUT_ENABLE_CONFIG)
+											  |(SPI_SETUP[index].SPI_Driver_frame_mode);
 		}
 		SPI_Driver_Start(index);
 	}
