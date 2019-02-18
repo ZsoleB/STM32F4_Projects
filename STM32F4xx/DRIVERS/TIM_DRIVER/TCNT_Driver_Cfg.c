@@ -10,10 +10,10 @@
 TCNT_Driver_Setup_Type TCNT_CONF_SETUP[TCNT_DRIVER_INSTANCE_NUM]=
 {
 	{
-		TIM2,
+		TIM4,
 		TCNT_DRIVER_UP_COUNTER,
-		90,
-		100
+		0x00,
+		0xFFFF
 	}
 };
 

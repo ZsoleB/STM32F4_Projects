@@ -67,6 +67,18 @@ of Stop condition (STOPF=1), repeated Start condition, loss of bus arbitration
 #define TWI_DRIVER_EV6									(uint32)(((TWI_DRIVER_MASTER_SALVE_SELECTED_FLAG2|TWI_DRIVER_BUS_BUSY_FLAG2|TWI_DRIVER_TX_RX_DIR_SELECTED_FLAG2)<<16)|(TWI_DRIVER_ADDRESS_SENT_MATCHED|TWI_DRIVER_DR_EMPTY_FLAG))
 #define TWI_DRIVER_EV8_2								(uint32)(((TWI_DRIVER_MASTER_SALVE_SELECTED_FLAG2|TWI_DRIVER_BUS_BUSY_FLAG2|TWI_DRIVER_TX_RX_DIR_SELECTED_FLAG2)<<16)|(TWI_DRIVER_BYTE_TX_FINISHED|TWI_DRIVER_DR_EMPTY_FLAG))
 
+/*TWI Interrupt enable bits*/
+
+/*Error interrupt enable*/
+#define TWI_DRIVER_ERROR_INTERRUPT_EN					((uint16)(0x01<<0x08))
+
+/*Event interrupt enable*/
+#define TWI_DRIVER_EVENT_INTERRUPT_EN					((uint16)(0x01<<0x09))
+
+/*Buffer interrupt enable*/
+#define TWI_DRIVER_BUFFER_INTERRUPT_EN					((uint16)(0x01<<0x0A))
+
+/*Type used for multiple data transfers*/
 typedef struct
 {
 	uint8_t payloadLenght;
@@ -74,22 +86,40 @@ typedef struct
 	uint8_t* address_buffer;
 }TWI_DRIVER_Messagebuffer_Type;
 
-uint32 TWI_Driver_Get_Status(I2C_TypeDef* TWIx,uint32 StatusCode);
-void TWI_Driver_Init(I2C_TypeDef* TWIx);
-uint8 TWI_Driver_ReceiveData(I2C_TypeDef* TWIx);
-void TWI_Driver_Reset(I2C_TypeDef* TWIx);
-void TWI_Driver_SetAddress(I2C_TypeDef* TWIx);
-void TWI_Driver_SetClock(I2C_TypeDef* TWIx);
-void TWI_Driver_SendData(I2C_TypeDef* TWIx,uint8 Payload);
-void TWI_Driver_SendAddress(I2C_TypeDef* TWIx,uint8 Address);
-void TWI_Driver_SendStart(I2C_TypeDef* TWIx);
-void TWI_Driver_SendStop(I2C_TypeDef* TWIx);
-void TWI_Driver_Start(I2C_TypeDef* TWIx);
-void TWI_Driver_Stop(I2C_TypeDef* TWIx);
-void TWI_Driver_PollingOneByteTx(I2C_TypeDef* TWIx,uint8 message, uint8 Address);
-void TWI_Driver_PollingTx(I2C_TypeDef* TWIx,TWI_DRIVER_Messagebuffer_Type* payload);
-void TWI_Driver_InterruptOneByteTx(I2C_TypeDef* TWIx,uint8 message, uint8 Address);
-void TWI_Driver_InterruptTx(I2C_TypeDef* TWIx,TWI_DRIVER_Messagebuffer_Type* payload);
+typedef struct
+{
+	I2C_TypeDef* TWI_Instance;
+	uint16 TWI_addressing_mode;
+	uint16 TWI_dual_addressing;
+	uint16 TWI_own_address1;
+	uint16 TWI_own_address2;
+	uint16 TWI_acknowledge_enable;
+	uint16 TWI_clock_stretching_disable;
+	uint16 TWI_general_call_enable;
+	uint16 TWI_clock_mode;
+	uint16 TWI_fast_mode_duty_cycle;
+	uint32 TWI_clock_frequency;
+	uint16 TWI_smb_bus_mode;
+}TWI_Driver_Setup_Type;
+
+extern TWI_Driver_Setup_Type* TWI_SETUP;
+
+void TWI_Driver_Init();
+uint8 TWI_Driver_ReceiveData(uint8 TWI_setup_nr);
+void TWI_Driver_Reset(uint8 TWI_setup_nr);
+void TWI_Driver_SetAddress(uint8 TWI_setup_nr);
+void TWI_Driver_SetClock(uint8 TWI_setup_nr);
+void TWI_Driver_SendData(uint8 TWI_setup_nr,uint8 Payload);
+void TWI_Driver_SendAddress(uint8 TWI_setup_nr,uint8 Address);
+void TWI_Driver_SendStart(uint8 TWI_setup_nr);
+void TWI_Driver_SendStop(uint8 TWI_setup_nr);
+uint8 TWI_Driver_Get_Status(uint8 TWI_setup_nr,uint32 StatusCode);
+void TWI_Driver_Start(uint8 TWI_setup_nr);
+void TWI_Driver_Stop(uint8 TWI_setup_nr);
+void TWI_Driver_PollingOneByteTx(uint8 TWI_setup_nr,uint8 message, uint8 Address);
+void TWI_Driver_PollingTx(uint8 TWI_setup_nr,TWI_DRIVER_Messagebuffer_Type* payload);
+void TWI_Driver_InterruptOneByteTx(uint8 TWI_setup_nr,uint8 message, uint8 Address);
+void TWI_Driver_InterruptTx(uint8 TWI_setup_nr,TWI_DRIVER_Messagebuffer_Type* payload);
 
 
 #endif /* DRIVERS_TWI_DRIVER_TWI_DRIVER_H_ */

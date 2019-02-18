@@ -10,9 +10,9 @@
 
 #include "TCNT_Driver.h"
 
-#define TCNT_DRIVER_TIMER_2                     			OK
+#define TCNT_DRIVER_TIMER_2                     			NOK
 #define TCNT_DRIVER_TIMER_3                     			NOK
-#define TCNT_DRIVER_TIMER_4                     			NOK
+#define TCNT_DRIVER_TIMER_4                     			OK
 #define TCNT_DRIVER_TIMER_5                     			NOK
 #define TCNT_DRIVER_TIMER_9                     			NOK
 #define TCNT_DRIVER_TIMER_10                     			NOK
@@ -38,7 +38,7 @@
 
 typedef enum
 {
-	TCNT_DRIVER_TIM2
+	TCNT_DRIVER_TIM4
 }TCNT_Driver_Instances;
 
 #if(TCNT_DRIVER_INTERRUPT_ENABLE == OK)
