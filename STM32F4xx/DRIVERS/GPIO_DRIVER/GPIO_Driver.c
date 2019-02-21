@@ -113,7 +113,7 @@ uint8 GPIO_Driver_ReadInputDataBit(uint8 GPIO_setup_nr,uint16 Bit_number)
 	uint8 result = 0x00;
 
 	input  = ((uint16)(GPIO_SETUP[GPIO_setup_nr].GPIO_Port->IDR));
-	result = ((input & (1<<Bit_number))!=0x00) ? 1 : 0;
+	result = ((input & ((0x01)<<(GPIO_SETUP[GPIO_setup_nr].GPIO_Pins[Bit_number])))!=0x00) ? 1 : 0;
 	return result;
 }
 
