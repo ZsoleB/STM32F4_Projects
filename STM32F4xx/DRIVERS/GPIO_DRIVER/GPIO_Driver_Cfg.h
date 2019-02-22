@@ -9,10 +9,10 @@
 
 #include "GPIO_Driver.h"
 
-#define GPIO_DRIVER_GPIOA 				  			NOK
+#define GPIO_DRIVER_GPIOA 				  			OK
 #define GPIO_DRIVER_GPIOB 				  			NOK
 #define GPIO_DRIVER_GPIOC 				  			NOK
-#define GPIO_DRIVER_GPIOD 				  			OK
+#define GPIO_DRIVER_GPIOD 				  			NOK
 #define GPIO_DRIVER_GPIOE 				  			NOK
 #define GPIO_DRIVER_GPIOF 				  			NOK
 #define GPIO_DRIVER_GPIOG 				  			NOK
@@ -24,13 +24,14 @@
 
 typedef enum
 {
-	GPIO_DRIVER_PORTB
+	GPIO_DRIVER_PORTA
 }GPIO_Driver_Instances;
 
 typedef enum
 {
-	GPIO_DRIVER_PORTB_PIN6,
-	GPIO_DRIVER_PORTB_PIN7
-}GPIO_Driver_B_Pin_Instances;
+	GPIO_DRIVER_PORTA_PIN0,
+	GPIO_DRIVER_PORTA_PIN4,
+	GPIO_DRIVER_PORTA_PIN7
+}GPIO_Driver_A_Pin_Instances;
 
 #endif /* GPIO_DRIVER_CFG_STM32F103_H_ */
