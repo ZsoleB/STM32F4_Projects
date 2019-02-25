@@ -10,12 +10,19 @@
 
 #include "SYSTEM_Driver.h"
 
+/*Regulator voltage scaling output selection*/
+#define SYSTEM_DRIVER_REGULATOR_SCALE 						SYSTEM_DRIVER_REGULATOR_SCALE_1
+
+/*System clock configuration*/
 #define SYSTEM_DRIVER_CLK_SOURCE 							SYSTEM_DRIVER_SWITCH_TO_PLL
-#define SYSTEM_DRIVER_PLL_SOURCE 							SYSTEM_DRIVER_PLL_CLOCK_SRC_HSE
-#define SYSTEM_DRIVER_PLL_MULTIPLIER 						SYSTEM_DRIVER_PLLMUL_9
+#define SYSTEM_DRIVER_PLL_SOURCE 							SYSTEM_DRIVER_PLLSRC_HSE
 #define SYSTEM_DRIVER_HCLK_DIV 	 							SYSTEM_DRIVER_AHB_NDIV
-#define SYSTEM_DRIVER_PCLK1_DIV 							SYSTEM_DRIVER_APB1_DIV2
-#define SYSTEM_DRIVER_PCLK2_DIV 							SYSTEM_DRIVER_APB2_NDIV
+#define SYSTEM_DRIVER_PCLK1_DIV 							SYSTEM_DRIVER_APB1_DIV4
+#define SYSTEM_DRIVER_PCLK2_DIV 							SYSTEM_DRIVER_APB2_DIV2
+#define SYSTEM_DRIVER_PLLQ 									((0x07)<<0x18)
+#define SYSTEM_DRIVER_PLLP 									((((0x02)>>1)-1)<<0x10)
+#define SYSTEM_DRIVER_PLLN 									((SYSTEM_Driver_Frequency_180MHz)<<0x06)
+#define SYSTEM_DRIVER_PLLM 									0x04
 
 /*Select the low power mode(s), which can be used by the application*/
 #define SYSTEM_DRIVER_SLEEP_ENABLE 							NOK

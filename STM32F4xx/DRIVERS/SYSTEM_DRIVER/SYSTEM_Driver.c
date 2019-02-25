@@ -42,15 +42,20 @@ void SYSTEM_Driver_Set_System_Clock()
 
 	if ((RCC->CR & SYSTEM_DRIVER_HSE_CLOCK_READY) != NOK)
 	{
-		HSEStatus = (uint32_t) 0x01;
+		HSEStatus = (uint32) 0x01;
 	}
 	else
 	{
-		HSEStatus = (uint32_t) 0x00;
+		HSEStatus = (uint32) 0x00;
 	}
 
-	if (HSEStatus == (uint32_t) 0x01)
+	if (HSEStatus == (uint32) 0x01)
 	{
+
+		/* Select regulator voltage output Scale 1 mode */
+		RCC->APB1ENR |= RCC_APB1ENR_PWREN;
+		PWR->CR |= SYSTEM_DRIVER_REGULATOR_SCALE;
+
 		/* Enable HSI */
 		RCC->CR |= SYSTEM_DRIVER_HSI_ON;
 		/* Wait till HSI is ready */
@@ -59,60 +64,71 @@ void SYSTEM_Driver_Set_System_Clock()
 		}
 
 		/* Select HSI as system clock source */
-		RCC->CFGR &= (uint32_t) ((uint32_t) ~(0x03));
-		RCC->CFGR |= (uint32_t) SYSTEM_DRIVER_SWITCH_TO_HSI;
+		RCC->CFGR &= (uint32) ((uint32) ~(0x03));
+		RCC->CFGR |= (uint32) SYSTEM_DRIVER_SWITCH_TO_HSI;
 
 		/* Clear AHB,APB1 and APB2 prescalers*/
-		RCC->CFGR &= (uint32_t) (~((0x0F) << 0x04));
-		RCC->CFGR &= (uint32_t) (~((0x07) << 0x08));
-		RCC->CFGR &= (uint32_t) (~((0x07) << 0x0B));
+		RCC->CFGR &= (uint32) (~((0x0F) << 0x04));
+		RCC->CFGR &= (uint32) (~((0x07) << 0x0A));
+		RCC->CFGR &= (uint32) (~((0x07) << 0x0D));
 
 		/* Disable PLL */
 		RCC->CR &= SYSTEM_DRIVER_PLL_OFF;
 
 		/* HCLK = SYSCLK */
-		RCC->CFGR |= (uint32_t) SYSTEM_DRIVER_HCLK_DIV;
+		RCC->CFGR |= (uint32) SYSTEM_DRIVER_HCLK_DIV;
 
 		/* PCLK1 = HCLK */
-		RCC->CFGR |= (uint32_t) SYSTEM_DRIVER_PCLK1_DIV;
+		RCC->CFGR |= (uint32) SYSTEM_DRIVER_PCLK1_DIV;
 
 		/* PCLK2 = HCLK */
-		RCC->CFGR |= (uint32_t) SYSTEM_DRIVER_PCLK2_DIV;
+		RCC->CFGR |= (uint32) SYSTEM_DRIVER_PCLK2_DIV;
 
-		/*  PLL configuration: PLLCLK = HSE * 9 = 72 MHz */
-		RCC->CFGR &= (uint32) ((uint32) (~((uint32) ((0x0F << 0x12) | (0x01 << 0x10)))));
-		RCC->CFGR |= (uint32) (SYSTEM_DRIVER_PLL_SOURCE | SYSTEM_DRIVER_PLL_MULTIPLIER);
+		/* Configure the main PLL */
+		RCC->PLLCFGR &= (~((0x3F) | (0x1FF << 0x06) | (0x03 << 0x10) | (0x01 << 0x16) | (0x0F << 18)));
+		RCC->PLLCFGR = SYSTEM_DRIVER_PLLM | SYSTEM_DRIVER_PLLN | SYSTEM_DRIVER_PLLP | SYSTEM_DRIVER_PLL_SOURCE | SYSTEM_DRIVER_PLLQ;
 
 		/* Enable PLL */
 		RCC->CR |= SYSTEM_DRIVER_PLL_ON;
 
-		/* Wait till PLL is ready */
+		/* Wait till the main PLL is ready */
 		while ((RCC->CR & SYSTEM_DRIVER_PLL_CLOCK_READY) == 0)
 		{
 		}
 
-#if(SYSTEM_DRIVER_CLK_SOURCE == SYSTEM_DRIVER_SWITCH_TO_HSI)
-		/* Select configured clock source */
-		RCC->CFGR |= (uint32_t)SYSTEM_DRIVER_CLK_SOURCE;
+		/* Configure Flash prefetch, Instruction cache, Data cache and wait state */
+		FLASH->ACR = FLASH_ACR_PRFTEN | FLASH_ACR_ICEN | FLASH_ACR_DCEN | FLASH_ACR_LATENCY_5WS;
 
-		/* Wait till PLL is used as system clock source */
-		while ((RCC->CFGR & (uint32_t)RCC_CFGR_SWS) != 0x00)
-		{}
+#if(SYSTEM_DRIVER_CLK_SOURCE == SYSTEM_DRIVER_SWITCH_TO_HSI)
+
+		/* Select configured clock source */
+		RCC->CFGR &= (~(0x03));
+		RCC->CFGR |= SYSTEM_DRIVER_CLK_SOURCE;
+
+		/* Wait till HSI is used as system clock source */
+		while ((RCC->CFGR & 0x0C) != 0x00)
+		{
+		}
 
 #elif(SYSTEM_DRIVER_CLK_SOURCE == SYSTEM_DRIVER_SWITCH_TO_HSE)
-		/* Select configured clock source */
-		RCC->CFGR |= (uint32_t)SYSTEM_DRIVER_CLK_SOURCE;
 
-		/* Wait till PLL is used as system clock source */
-		while ((RCC->CFGR & (uint32_t)RCC_CFGR_SWS) != 0x04)
-		{}
+		/* Select configured clock source */
+		RCC->CFGR &= (~(0x03));
+		RCC->CFGR |= SYSTEM_DRIVER_CLK_SOURCE;
+
+		/* Wait till HSE is used as system clock source */
+		while ((RCC->CFGR & 0x0C) != 0x04)
+		{
+		}
 
 #elif(SYSTEM_DRIVER_CLK_SOURCE == SYSTEM_DRIVER_SWITCH_TO_PLL)
+
 		/* Select configured clock source */
-		RCC->CFGR |= (uint32_t) SYSTEM_DRIVER_CLK_SOURCE;
+		RCC->CFGR &= (~(0x03));
+		RCC->CFGR |= SYSTEM_DRIVER_CLK_SOURCE;
 
 		/* Wait till PLL is used as system clock source */
-		while ((RCC->CFGR & (uint32_t) RCC_CFGR_SWS) != 0x08)
+		while ((RCC->CFGR & 0x0C) != 0x08)
 		{
 		}
 #endif
@@ -179,7 +195,7 @@ uint8 SYSTEM_Driver_PVD_Get_Power_Status()
 #endif
 
 #if(SYSTEM_DRIVER_SLEEP_ENABLE == OK)
-/*Sleep mode (CPU clock off, all peripherals including Cortex®-M3 core peripherals like
+/*Sleep mode (CPU clock off, all peripherals including Cortexï¿½-M3 core peripherals like
  NVIC, SysTick, etc. are kept running)*/
 void SYSTEM_Driver_Enter_Sleep_Mode()
 {

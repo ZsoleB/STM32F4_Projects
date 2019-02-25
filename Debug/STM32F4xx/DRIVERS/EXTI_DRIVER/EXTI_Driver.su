@@ -1,7 +1,7 @@
 EXTI_Driver.c:10:6:EXTI_Driver_Init	16	static
-EXTI_Driver.c:44:6:EXTI_Driver_Rising_Trigger_Select	16	static
-EXTI_Driver.c:49:6:EXTI_Driver_Rising_Trigger_Clear	16	static
-EXTI_Driver.c:54:6:EXTI_Driver_Falling_Trigger_Select	16	static
-EXTI_Driver.c:59:6:EXTI_Driver_Falling_Trigger_Clear	16	static
-EXTI_Driver.c:63:6:EXTI_Driver_Generate_SWInterrupt	16	static
-EXTI_Driver.c:71:6:EXTI_Driver_Clear_PendingInterrupt	16	static
+EXTI_Driver.c:96:6:EXTI_Driver_Rising_Trigger_Select	16	static
+EXTI_Driver.c:101:6:EXTI_Driver_Rising_Trigger_Clear	16	static
+EXTI_Driver.c:106:6:EXTI_Driver_Falling_Trigger_Select	16	static
+EXTI_Driver.c:111:6:EXTI_Driver_Falling_Trigger_Clear	16	static
+EXTI_Driver.c:115:6:EXTI_Driver_Generate_SWInterrupt	16	static
+EXTI_Driver.c:126:6:EXTI_Driver_Clear_PendingInterrupt	16	static

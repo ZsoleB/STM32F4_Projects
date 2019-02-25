@@ -16,7 +16,7 @@ int main()
 	{
 		if(GPIO_Driver_ReadInputDataBit(GPIO_DRIVER_PORTA,GPIO_DRIVER_PORTA_PIN4)!=0x00)
 		{
-			SYSTEM_Driver_Enter_Standby_Mode();
+			/*SYSTEM_Driver_Enter_Standby_Mode();*/
 		}
 		if((SYSTEM_Driver_Enter_Standby_Mode_Check())==SYSTEM_DRIVER_STANDBY_FLAG_SET)
 		{
