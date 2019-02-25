@@ -91,7 +91,7 @@ void SYSTEM_Driver_Set_System_Clock()
 		/* Enable PLL */
 		RCC->CR |= SYSTEM_DRIVER_PLL_ON;
 
-		/* Wait till the main PLL is ready */
+		/* Wait till PLL is ready */
 		while ((RCC->CR & SYSTEM_DRIVER_PLL_CLOCK_READY) == 0)
 		{
 		}
