@@ -27,7 +27,6 @@ void SYSTEM_Driver_Software_Reset()
 	__DSB();
 }
 
-#if(0x00)
 void SYSTEM_Driver_Set_System_Clock()
 {
 	volatile uint32 StartUpCounter = 0, HSEStatus = 0;
@@ -119,7 +118,6 @@ void SYSTEM_Driver_Set_System_Clock()
 #endif
 	}
 }
-#endif
 
 #if(SYSTEM_DRIVER_PVD_ENABLE==OK)
 
@@ -222,10 +220,42 @@ void SYSTEM_Driver_Enter_Stop_Mode()
 	  In this case, its used for Stop mode.*/
 	SCB->SCR|=SYSTEM_DRIVER_DEEP_SLEEP;
 
+	/*Enable flash power down, to further reduce the power consumption.
+	  It will increase the wake-up time.*/
+#if(SYSTEM_DRIVER_FLASH_POWER_DOWN_ENABLE == OK)
+	PWR->CR |= SYSTEM_DRIVER_STOP_MODE_FLASH_POWER_DOWN;
+#elif (SYSTEM_DRIVER_FLASH_POWER_DOWN_ENABLE == NOK)
+	PWR->CR &= (~SYSTEM_DRIVER_STOP_MODE_FLASH_POWER_DOWN);
+#else
+	/*Nothing to do*/
+#warning "The selected SYSTEM_DRIVER_FLASH_POWER_DOWN_ENABLE is not correct, choose one from the available ones !"
+#endif
+
+	/*Under-drive mode: the 1.2 V domain is preserved in reduced leakage mode. This
+	  mode is only available with the main regulator or in low-power regulator mode. */
+#if(SYSTEM_DRIVER_UNDER_DRIVE_MODE == OK)
+	PWR->CR |= SYSTEM_DRIVER_STOP_MODE_UNDER_DRIVE;
+#elif (SYSTEM_DRIVER_UNDER_DRIVE_MODE == NOK)
+	PWR->CR &= (~SYSTEM_DRIVER_STOP_MODE_UNDER_DRIVE);
+#else
+	/*Nothing to do*/
+#warning "The selected SYSTEM_DRIVER_UNDER_DRIVE_MODE is not correct, choose one from the available ones !"
+#endif
+
 	/*To further reduce power consumption in Stop mode, the internal voltage regulator
 	  can be put in low-power mode.*/
 #if(SYSTEM_DRIVER_STOP_MODE_LP_ENABLE == OK)
 	PWR->CR |= SYSTEM_DRIVER_STOP_MODE_LOW_POWER;
+#if(SYSTEM_DRIVER_UNDER_DRIVE_MODE == OK)
+	PWR->CR &= (~SYSTEM_DRIVER_STOP_MODE_MR_UNDER_DRIVE);
+	PWR->CR |= SYSTEM_DRIVER_STOP_MODE_UNDER_DRIVE_LP;
+#elif (SYSTEM_DRIVER_UNDER_DRIVE_MODE == NOK)
+	PWR->CR &= (~(SYSTEM_DRIVER_STOP_MODE_UNDER_DRIVE_LP|SYSTEM_DRIVER_STOP_MODE_MR_UNDER_DRIVE));
+	PWR->CR |= SYSTEM_DRIVER_STOP_MODE_LOW_POWER;
+#else
+	/*Nothing to do*/
+#warning "The selected SYSTEM_DRIVER_UNDER_DRIVE_MODE is not correct, choose one from the available ones !"
+#endif
 #elif (SYSTEM_DRIVER_STOP_MODE_LP_ENABLE == NOK)
 	PWR->CR &= (~SYSTEM_DRIVER_STOP_MODE_LOW_POWER);
 #else
