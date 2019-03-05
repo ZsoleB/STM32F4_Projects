@@ -11,17 +11,60 @@
 #include "stm32f4xx.h"
 #include "StdTypes.h"
 
-/*FMC read/write functions*/
+/*FMC read/write functions
 
-#define FMC_DRIVER_WRITE8(address, value)									(*(volatile uint8*)  (FMC_SDRAM_START_ADDRESS + (address)) = (value))
-#define FMC_DRIVER_READ8(address)											(*(volatile uint8*)  (FMC_SDRAM_START_ADDRESS + (address)))
+ Taken the fact that the used SDRAM has a 16bit memory width, the main
+ read and write functions are based on the 16bit read/write functions.
+ In the case of 8/32 bits, the FMC will adapt the data, making the
+ operations complicated to handle. So, by using the 16 methods, the
+ 8 and 32 bit operations can be derived, creating a much more manageable
+ interfaces.
+ */
+
 #define FMC_DRIVER_WRITE16(address, value)									(*(volatile uint16*) (FMC_SDRAM_START_ADDRESS + (address)) = (value))
-#define FMC_DRIVER_READ16(address)											(*(volatile uint16*) (FMC_SDRAM_START_ADDRESS + (address)))
-#define FMC_DRIVER_WRITE32(address, value)									(*(volatile uint32*) (FMC_SDRAM_START_ADDRESS + (address)) = (value))
-#define FMC_DRIVER_READ32(address)											(*(volatile uint32*) (FMC_SDRAM_START_ADDRESS + (address)))
+#define FMC_DRIVER_WRITE8(address, value)									(FMC_DRIVER_WRITE16(address, value))
+#define FMC_DRIVER_WRITE32(address, value)({\
+		do{\
+			FMC_DRIVER_WRITE16(address, (uint16)((value & 0xFFFF0000)>>0x10));\
+			FMC_DRIVER_WRITE16((address+2), (uint16)(value & 0x0000FFFF));\
+			}while(0);\
+		})
+
+
+#define FMC_DRIVER_READ16(arg) ({\
+		uint32 payload = 0x00;\
+		do{\
+			if(((arg/2)%2)==0x00)\
+			{\
+				payload = (*(volatile uint32*) (FMC_SDRAM_START_ADDRESS+(arg+2)));\
+			}\
+			else\
+			{\
+				payload = (((*(volatile uint32*) (FMC_SDRAM_START_ADDRESS+(arg-1)))<<0x08)& 0xFFFF0000);\
+			}\
+			}while(0);\
+			payload = (payload >> 0x10);\
+			payload;\
+	})
+
+#define FMC_DRIVER_READ8(arg)({\
+		uint8 payload = 0x00;\
+		do{\
+			payload = FMC_DRIVER_READ16(arg);\
+			}while(0);\
+			payload;\
+})
+
+#define FMC_DRIVER_READ32(arg)({\
+		uint32 payload = 0x00;\
+		do{\
+			payload = (((FMC_DRIVER_READ16(arg))<<0x10)|(FMC_DRIVER_READ16(arg+2)));\
+			}while(0);\
+			payload;\
+		})
 
 /*Wait function macro for the initialization time, and an arbitrary delay time, long enough for the needed setup time*/
-#define FMC_DRIVER_WAIT_PERIOD												0x10FFEF0
+#define FMC_DRIVER_WAIT_PERIOD												0xFFFF
 #define FMC_DRIVER_WAIT(arg)\
 	do{\
 		uint32 counter = arg;\
