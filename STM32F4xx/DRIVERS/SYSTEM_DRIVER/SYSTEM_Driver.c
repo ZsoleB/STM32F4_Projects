@@ -208,7 +208,7 @@ void SYSTEM_Driver_Enter_Sleep_Mode()
 	SCB->SCR |= (SYSTEM_DRIVER_SLEEP_NOW);
 #else
 	/*Nothing to do*/
-#warning "The selected SYSTEM_DRIVER_SLEEP_MODE is not correct, choose one from the available ones !"
+#error "The selected SYSTEM_DRIVER_SLEEP_MODE is not correct, choose one from the available ones !"
 #endif
 
 	/*Set the selected low-power mode, with the desired exit mode*/
@@ -218,7 +218,7 @@ void SYSTEM_Driver_Enter_Sleep_Mode()
 	__WFE();
 #else
 	/*Nothing to do*/
-#warning "The selected SYSTEM_DRIVER_SLEEP_ENTER is not correct, choose one from the available ones !"
+#error "The selected SYSTEM_DRIVER_SLEEP_ENTER is not correct, choose one from the available ones !"
 #endif
 	SCB->SCR &= (~SYSTEM_DRIVER_SLEEP_ON_EXIT);
 }
@@ -244,7 +244,7 @@ void SYSTEM_Driver_Enter_Stop_Mode()
 	PWR->CR &= (~SYSTEM_DRIVER_STOP_MODE_FLASH_POWER_DOWN);
 #else
 	/*Nothing to do*/
-#warning "The selected SYSTEM_DRIVER_FLASH_POWER_DOWN_ENABLE is not correct, choose one from the available ones !"
+#error "The selected SYSTEM_DRIVER_FLASH_POWER_DOWN_ENABLE is not correct, choose one from the available ones !"
 #endif
 
 	/*Under-drive mode: the 1.2 V domain is preserved in reduced leakage mode. This
@@ -255,7 +255,7 @@ void SYSTEM_Driver_Enter_Stop_Mode()
 	PWR->CR &= (~SYSTEM_DRIVER_STOP_MODE_UNDER_DRIVE);
 #else
 	/*Nothing to do*/
-#warning "The selected SYSTEM_DRIVER_UNDER_DRIVE_MODE is not correct, choose one from the available ones !"
+#error "The selected SYSTEM_DRIVER_UNDER_DRIVE_MODE is not correct, choose one from the available ones !"
 #endif
 
 	/*To further reduce power consumption in Stop mode, the internal voltage regulator
@@ -270,13 +270,13 @@ void SYSTEM_Driver_Enter_Stop_Mode()
 	PWR->CR |= SYSTEM_DRIVER_STOP_MODE_LOW_POWER;
 #else
 	/*Nothing to do*/
-#warning "The selected SYSTEM_DRIVER_UNDER_DRIVE_MODE is not correct, choose one from the available ones !"
+#error "The selected SYSTEM_DRIVER_UNDER_DRIVE_MODE is not correct, choose one from the available ones !"
 #endif
 #elif (SYSTEM_DRIVER_STOP_MODE_LP_ENABLE == NOK)
 	PWR->CR &= (~SYSTEM_DRIVER_STOP_MODE_LOW_POWER);
 #else
 	/*Nothing to do*/
-#warning "The selected SYSTEM_DRIVER_STOP_MODE_LP_ENABLE is not correct, choose one from the available ones !"
+#error "The selected SYSTEM_DRIVER_STOP_MODE_LP_ENABLE is not correct, choose one from the available ones !"
 #endif
 
 	/*Set the selected low-power mode, with the desired exit mode*/
@@ -286,7 +286,7 @@ void SYSTEM_Driver_Enter_Stop_Mode()
 	__WFE();
 #else
 	/*Nothing to do*/
-#warning "The selected SYSTEM_DRIVER_STOP_ENTER is not correct, choose one from the available ones !"
+#error "The selected SYSTEM_DRIVER_STOP_ENTER is not correct, choose one from the available ones !"
 #endif
 	SCB->SCR &=(~SYSTEM_DRIVER_DEEP_SLEEP);
 }
@@ -318,7 +318,7 @@ void SYSTEM_Driver_Enter_Standby_Mode()
 	PWR->CSR |= (~SYSTEM_DRIVER_WKUP_PIN);
 #else
 	/*Nothing to do*/
-#warning "The selected SYSTEM_DRIVER_WKUP_PIN_ENABLE is not correct, choose one from the available ones !"
+#error "The selected SYSTEM_DRIVER_WKUP_PIN_ENABLE is not correct, choose one from the available ones !"
 #endif
 
 	/*Set the selected low-power mode, with the desired exit mode*/
@@ -328,7 +328,7 @@ void SYSTEM_Driver_Enter_Standby_Mode()
 	__WFE();
 #else
 	/*Nothing to do*/
-#warning "The selected SYSTEM_DRIVER_STANDBY_ENTER is not correct, choose one from the available ones !"
+#error "The selected SYSTEM_DRIVER_STANDBY_ENTER is not correct, choose one from the available ones !"
 #endif
 }
 #endif
