@@ -60,6 +60,7 @@
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/RTC_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/USB_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/FMC_DRIVER"/>
+									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/DAC_DRIVER"/>
 								</option>
 								<inputType id="com.atollic.truestudio.as.input.1112908016" name="Input" superClass="com.atollic.truestudio.as.input"/>
 							</tool>
@@ -77,6 +78,7 @@
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/ADC_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/CAN_DRIVER"/>
+									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/DAC_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/DMA_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/EXTI_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/FLASH_DRIVER"/>
@@ -222,6 +224,7 @@
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/RTC_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/USB_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/FMC_DRIVER"/>
+									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/DAC_DRIVER"/>
 								</option>
 								<inputType id="com.atollic.truestudio.as.input.280053168" name="Input" superClass="com.atollic.truestudio.as.input"/>
 							</tool>
@@ -260,6 +263,7 @@
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/RTC_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/USB_DRIVER"/>
 									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/FMC_DRIVER"/>
+									<listOptionValue builtIn="false" value="../STM32F4xx/DRIVERS/DAC_DRIVER"/>
 								</option>
 								<option id="com.atollic.truestudio.common_options.target.endianess.1710006207" name="Endianess" superClass="com.atollic.truestudio.common_options.target.endianess"/>
 								<option id="com.atollic.truestudio.common_options.target.mcpu.846962307" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" value="STM32F429ZI" valueType="enumerated"/>
